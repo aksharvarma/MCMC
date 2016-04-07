@@ -77,11 +77,10 @@ int main(){
   print_vector(final_x,n);
   printf("The haul is worth: %d\n\n", best_haul);
  
- deterministic:
   int best_haul_det = knapsack_dp(w_max, w, g, n);
-  printf("Deterministic: %d\n", knapsack_dp(w_max, w, g, n));
+  printf("Deterministic: %d\n", best_haul_det);
 
-  printf("Error: %d\n",(best_haul - best_haul_det)*100/best_haul_det);
+  printf("Error: %d%\n",(best_haul_det - best_haul)*100/best_haul_det);
   free(g);
   free(w);
   free(x);
