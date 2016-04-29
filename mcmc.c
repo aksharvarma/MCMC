@@ -25,7 +25,7 @@ int knapsack_dp(int w_max, int *w, int *g, int n);
 int main(){
   srand(time(NULL));
   
-  int i,n=max(rand()%100+1,10);
+  int i,n=rand()%100+1;
   int mcmc_runs=1000;
   int iterations=pow(10,2);
   int *w=(int*)malloc(n*sizeof(int));
@@ -35,10 +35,10 @@ int main(){
   int *final_x=(int*)malloc(n*sizeof(int));
   int best_haul=-99, haul=0;
   
-  double beta_start=0.075, beta_increment=0.075;
+  double beta_start=0.0005, beta_increment=0.0005;
   
 
-  w_max=min((n*n)/10+rand()%(n),100);
+  w_max=(n*n)/10+rand()%(n/2);
   /* scanf("%d", &w_max); */
   for(i=0;i<n;i++){
     w[i]=rand()%(n*5)+1;
@@ -80,7 +80,7 @@ int main(){
   int best_haul_det = knapsack_dp(w_max, w, g, n);
   printf("Deterministic: %d\n", best_haul_det);
 
-  printf("Error: %d%\n",(best_haul_det - best_haul)*100/best_haul_det);
+  printf("Error: %d %\n",(best_haul_det - best_haul)*100/best_haul_det);
   free(g);
   free(w);
   free(x);
@@ -167,7 +167,6 @@ int *mcmc(int iterations, int w_max, int *w, int *g, int n, int beta_start, int 
 
   for(i=0;i<n;i++)
       x_current[i]=0;
-
   for(i=0;i<iterations;i++){
     x_proposed=propose(w_max, x_current, w, n,x_proposal);
 

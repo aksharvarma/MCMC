@@ -1,0 +1,10 @@
+#!/bin/zsh
+total=0
+for i in {1..100}
+do
+    a=$(./mcmc | grep Error | cut -d " " -f 2 );
+    echo $a;
+    total=$((total+a));
+done
+avg=$((total/100));
+echo "Average Error is: $avg"
